@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salon Gallery</title>
+  <link rel="stylesheet" href="./saloon.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      color: #333;
+      line-height: 1.6;
+      animation: bodyAnimation 10s ease-in-out infinite;
+    }
+ 
+    @keyframes bodyAnimation {
+      0% { background-color: #f0f0f0; }
+      50% { background-color: #e8f4f8; }
+      100% { background-color: #f0f0f0; }
+    }
+ 
+    .salon-header {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+ 
+    .salon-header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      color: #4a4a4a;
+      animation: slideIn 1s ease-in-out;
+    }
+ 
+    .salon-header p {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      color: #666;
+    }
+ 
+    .salon-timings {
+      text-align: center;
+      margin: 20px 0;
+      background-color: #ffffff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 2s ease-in-out;
+      transition: all ease 2s;
+    }
+    .salon-timings :hover{
+        transform:translateX(2px);
+        color: brown;
+    }
+    .salon-timings h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #4a4a4a;
+    }
+ 
+    .salon-timings ul {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.2rem;
+    }
+ 
+    .salon-timings ul li {
+      margin-bottom: 5px;
+      color: #666;
+    }
+ 
+    .gallery-container {
+      max-width: 90%;
+      margin: 50px auto;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+ 
+    .gallery-title {
+      font-size: 2.8rem;
+      color: #333;
+      margin-bottom: 30px;
+      animation: slideIn 1s ease-in-out;
+    }
+ 
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+ 
+    .gallery-item {
+      position: relative;
+      margin: 15px;
+      width: calc(33.333% - 30px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 2s ease-in-out;
+    }
+ 
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+ 
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.5s ease;
+    }
+ 
+    .gallery-item:hover img {
+      opacity: 0.8;
+    }
+ 
+    .gallery-item-description {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+ 
+    .gallery-item:hover .gallery-item-description {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+ 
+    .services-section {
+      max-width: 90%;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+ 
+    .services-section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      color: #4a4a4a;
+      text-align: center;
+    }
+ 
+    .services-content {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+ 
+    .services-list {
+      flex: 1;
+      max-width: 60%;
+      margin-right: 20px;
+    }
+ 
+    .service-item {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 20px;
+    }
+ 
+    .service-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+ 
+    .service-item h3 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #333;
+    }
+ 
+    .service-item p {
+      margin: 10px 0 0;
+      font-size: 1rem;
+      color: #666;
+    }
+ 
+    .services-videos {
+      flex: 1;
+      max-width: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+ 
+    .services-videos iframe {
+      width: 100%;
+      height: 150px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+ 
+    .additional-content {
+      max-width: 80%;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      animation: fadeIn 2s ease-in-out;
+    }
+ 
+    .form-section, .subscription-section {
+      flex: 1;
+      margin-right: 20px;
+      max-width: 45%;
+    }
+ 
+    .contact-form {
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 2s ease-in-out;
+    }
+ 
+    .contact-form h2 {
+      font-size: 1.6rem;
+      color: #4a4a4a;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+ 
+    .contact-form p {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+ 
+    .contact-form label {
+      font-size: 0.9rem;
+      color: #333;
+      margin-bottom: 5px;
+      display: block;
+    }
+ 
+    .contact-form input,
+    .contact-form textarea {
+      width: calc(100% - 22px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+ 
+    .contact-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+ 
+    .contact-form button:hover {
+      background-color: #555;
+    }
+ 
+    .subscription-section {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 2s ease-in-out;
+    }
+ 
+    .subscription-section h2 {
+      font-size: 1.6rem;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+ 
+    .subscription-section p {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+ 
+    .subscription-section input {
+      width: calc(100% - 22px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+ 
+    .subscription-section button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+ 
+    .subscription-section button:hover {
+      background-color: #555;
+    }
+ 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+ 
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+ 
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="salon-header">
+    <h1>Welcome to [Your Salon Name]</h1>
+    <p>Your destination for luxurious beauty and grooming treatments</p>
+  </div> -->
+ 
+  <div class="salon-timings">
+    <h2>Our Opening Hours</h2>
+    <ul>
+      <li>Monday - Friday: 10:00 AM - 7:00 PM</li>
+      <li>Saturday: 10:00 AM - 6:00 PM</li>
+      <li>Sunday: Closed</li>
+    </ul>
+  </div>
+<!--  
+  <div class="gallery-container">
+    <h2 class="gallery-title">Our Salon Gallery</h2>
+    <div id="gallery" class="gallery"></div>
+  </div>
+  -->
+  <div class="services-section">
+    <h2>Our Services</h2>
+    <div class="services-content">
+      <div class="services-list">
+        <div class="service-item">
+          <h3>Hair Styling</h3>
+          <p>Expert haircuts, styling, and treatments tailored to your preferences.</p>
+        </div>
+        <div class="service-item">
+          <h3>Makeup Art</h3>
+          <p>Professional makeup services for any occasion, from everyday looks to special events.</p>
+        </div>
+        <div class="service-item">
+          <h3>Manicure & Pedicure</h3>
+          <p>Relaxing and rejuvenating manicure and pedicure treatments with premium products.</p>
+        </div>
+        <div class="service-item">
+          <h3>Facial Treatments</h3>
+          <p>Customized facial treatments to cleanse, nourish, and rejuvenate your skin.</p>
+        </div>
+        <div class="service-item">
+          <h3>Hair Coloring</h3>
+          <p>Vibrant and trendy hair color services with top-quality dyes and techniques.</p>
+        </div>
+        <div class="service-item">
+          <h3>Massage Therapy</h3>
+          <p>Relax and unwind with our soothing massage therapy services.</p>
+        </div>
+      </div>
+ 
+      <div class="services-videos">
+        <iframe src="https://www.youtube.com/embed/WniVHWZGb4k" title="Hair Styling" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Wq2z3nh2weU" title="Makeup Art" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/otej7WLdPh0" title="Manicure & Pedicure" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/hiLVT0LQOX8?si=D4NJzphTHxX6seJO" title="New Service Video" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+<!--  
+  <div class="additional-content">
+    <div class="form-section">
+      <div class="contact-form">
+        <h2>Contact Us</h2>
+        <p>Have questions or want to book an appointment? Reach out to us through the contact form below or give us a call.</p>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+         
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+         
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+         
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div> -->
+ 
+    <!-- <div class="subscription-section">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Stay updated with the latest offers and updates from [Your Salon Name]. Enter your email below to subscribe to our newsletter.</p>
+      <form>
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div> -->
+ 
+  <script>
+    const galleryData = [
+      {
+        image: '',
+        description: 'Hair Styling',
+      },
+      {
+        image: '',
+        description: 'Makeup Art',
+      },
+      {
+        image: '',
+        description: 'Manicure & Pedicure',
+      },
+      {
+        image: '',
+        description: 'Facial Treatments',
+      },
+      {
+        image: '',
+        description: 'Hair Coloring',
+      },
+      {
+        image: '',
+        description: 'Massage Therapy',
+      },
+    ];
+ 
+    function createGallery() {
+      const gallery = document.getElementById('gallery');
+ 
+      galleryData.forEach(item => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+ 
+        const img = document.createElement('img');
+        img.src = item.image;
+ 
+        const description = document.createElement('div');
+        description.className = 'gallery-item-description';
+        description.textContent = item.description;
+ 
+        galleryItem.appendChild(img);
+        galleryItem.appendChild(description);
+        gallery.appendChild(galleryItem);
+      });
+    }
+ 
+    document.addEventListener('DOMContentLoaded', createGallery);
+  </script>
+</body>
+</html>
